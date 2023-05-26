@@ -17,4 +17,5 @@ admin.get('/:id', (req: Request, res: Response) => {
 	res.send(`Hello Admin no. ${req.params.id}`);
 });
 
+
 export default admin;
