@@ -1,4 +1,8 @@
+// database
+
 import express, { NextFunction, Request, Response } from 'express';
+import connection from '../config/db';
+
 const user = express.Router();
 
 // middleware that is specific to this user
@@ -13,14 +17,20 @@ user.get('/', (req: Request, res: Response) => {
 
 // define the user id route
 user.get('/:id', (req: Request, res: Response) => {
-	res.send(`Hello user no. ${req.params.id}`);
+	connection.query(
+		`SELECT * FROM tbl_user WHERE user_id = ${req.params.id};`,
+		(error, results) => {
+			if (error) {
+				console.error('Error executing query:', error);
+				res.status(500).json({ error: 'Internal Server Error' });
+			} else {
+				res.json(results);
+			}
+		}
+	);
 });
-
-//defines user info
-user.get('/:id/info', (req: Request, res: Response) => {
-	console.log(req.body);
-
-	res.send(`Hello user no. ${req.params.id}`);
+// user post request
+user.post('/:id/transaqtion', (req: Request, res: Response) => {
+	res.send('posted');
 });
-
 export default user;

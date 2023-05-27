@@ -1,15 +1,31 @@
+// express
 import express, { Express, Request, Response } from 'express';
-import middleman from './middleware/middleman';
-import user from './routes/user';
-import admin from './routes/admin';
-import guest from './routes/guest';
+// middleman
+import middleman from './src/middleware/middleman';
+// routes
+import user from './src/routes/user';
+import admin from './src/routes/admin';
+import guest from './src/routes/guest';
+// database
+import db from './src/config/db';
+
 const port = 3000;
 
 const app: Express = express();
 
-app.use(express.json());
+// db from the  database
+db.connect((error) => {
+	if (error) {
+		console.error('Unable to connect to the database:', error);
+	} else {
+		console.log('Database connection established.');
+	}
+});
 
+app.use(express.json());
+// init the middleware
 app.use(middleman);
+
 app.listen(port, () => {
 	console.log(`now listening on port ${port}`);
 });

@@ -20,14 +20,18 @@
 
 - this is where the magic where all the routes are imported and stuff
 
-### /routes
+### /Source
 
-- this is where our routes is held. the names of the file correspond on what they are req/res they are responsible for
+- this is where all the stuff is stored
 
-### /middleware
+  #### /routes
 
-- middleware is the function that checks the requests and if you have the right the authentication.
+  - this is where our routes is held. the names of the file correspond on what they are req/res they are responsible for
 
-### /public
+  #### /middleware
 
-- where html renders are stored and images i guess
+  - middleware is the function that checks the requests and if you have the right the authentication.
+
+  #### /public
+
+  - where html renders are stored and images i guess
