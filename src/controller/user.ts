@@ -17,5 +17,22 @@ export default {
 		);
 	},
 	// post transaction
-	// update data
+
+	// update
+	async updateInfo(req: Request, res: Response, next: NextFunction) {
+		const { name, age } = req.body;
+
+		await connection.query(
+			'UPDATE tbl_user SET name = ?, age = ? WHERE user_id = ?; ',
+			[name, age, req.params.id],
+			(error, results) => {
+				if (error) {
+					console.error('Error executing query:', error);
+					res.status(500).json({ error: 'Internal Server Error' });
+				} else {
+					res.json(results);
+				}
+			}
+		);
+	},
 };

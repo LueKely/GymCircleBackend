@@ -21,9 +21,12 @@ userRoute.get('/', (req: Request, res: Response) => {
 // define the userRoute id route
 userRoute.get('/:id', middleman(user.getUserInfo));
 
+// update your info
+userRoute.patch('/:id', middleman(user.updateInfo));
+
 // userRoute post request
 userRoute.post('/:id/transaction', (req: Request, res: Response) => {
-	res.send('posted');
+	res.send('transaction gaming');
 });
 
 export default userRoute;

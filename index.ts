@@ -24,10 +24,10 @@ db.connect((error) => {
 	}
 });
 
-app.use(express.json());
-
 // init the middleware
 app.use(errorHandler);
+app.use(express.json());
+
 // app.use(notFoundHandler);
 
 app.listen(port, () => {
