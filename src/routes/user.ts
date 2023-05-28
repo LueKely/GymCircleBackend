@@ -15,7 +15,7 @@ userRoute.use((req: Request, res: Response, next: NextFunction) => {
 
 // define the home page route
 userRoute.get('/', (req: Request, res: Response) => {
-	res.send('this is the userRoute');
+	res.send(req.body.test + ' ' + req.headers.key);
 });
 
 // define the userRoute id route

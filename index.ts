@@ -28,7 +28,7 @@ app.use(express.json());
 
 // init the middleware
 app.use(errorHandler);
-app.use(notFoundHandler);
+// app.use(notFoundHandler);
 
 app.listen(port, () => {
 	console.log(`now listening on port ${port}`);
