@@ -1,9 +1,11 @@
 // express
 import express, { Express, Request, Response } from 'express';
 // middleman
-import middleman from './src/middleware/middleman';
+import { errorHandler } from './src/middleware/middleman';
+import { notFoundHandler } from './src/middleware/middleman';
+
 // routes
-import user from './src/routes/user';
+import userRoute from './src/routes/user';
 import admin from './src/routes/admin';
 import guest from './src/routes/guest';
 // database
@@ -23,8 +25,10 @@ db.connect((error) => {
 });
 
 app.use(express.json());
+
 // init the middleware
-app.use(middleman);
+app.use(errorHandler);
+app.use(notFoundHandler);
 
 app.listen(port, () => {
 	console.log(`now listening on port ${port}`);
@@ -34,6 +38,6 @@ app.get('/', (req: Request, res: Response) => {
 	res.send('hello');
 });
 
-app.use('/user', user);
+app.use('/user', userRoute);
 app.use('/admin', admin);
 app.use('/guest', guest);

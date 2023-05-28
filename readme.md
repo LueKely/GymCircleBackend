@@ -20,7 +20,11 @@
 
 - this is where the magic where all the routes are imported and stuff
 
-### /Source
+### /public
+
+  - where html renders are stored and images i guess
+
+### /src
 
 - this is where all the stuff is stored
 
@@ -35,3 +39,7 @@
   #### /public
 
   - where html renders are stored and images i guess
+  
+  #### /config
+
+  - this is where the database connections lies
