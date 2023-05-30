@@ -1,24 +1,20 @@
 import express, { NextFunction, Request, Response } from 'express';
-
-// database
 import user from '../controller/user';
-
-//middleman
 import { middleman } from '../middleware/middleman';
 
 const userRoute = express.Router();
 
-// middleware that is specific to this userRoute
+// middleware
 userRoute.use((req: Request, res: Response, next: NextFunction) => {
 	next();
 });
 
-// define the home page route
 userRoute.get('/', (req: Request, res: Response) => {
+	console.log();
 	res.send(req.body.test + ' ' + req.headers.key);
 });
 
-// define the userRoute id route
+// get info
 userRoute.get('/:id', middleman(user.getUserInfo));
 
 // update your info

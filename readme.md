@@ -20,9 +20,14 @@
 
 - this is where the magic where all the routes are imported and stuff
 
+### .env
+
+- this is not available in our repo for i added it in the git ignore
+  just pm me for the .env this is crucial btw.
+
 ### /public
 
-  - where html renders are stored and images i guess
+- where html renders are stored and images i guess
 
 ### /src
 
@@ -39,7 +44,37 @@
   #### /public
 
   - where html renders are stored and images i guess
-  
+
   #### /config
 
   - this is where the database connections lies
+
+# Lue's guide to commit messages:
+
+When adding a commit message add this prefix and the details of your commits.
+
+    - feat – a new feature is introduced with the changes
+
+    - fix – a bug fix has occurred
+
+    - chore – changes that do not relate to a fix or feature and don't modify src or test files (for example updating dependencies)
+
+    - refactor – refactored code that neither fixes a bug nor adds a feature
+
+    - docs – updates to documentation such as a the README or other markdown files
+
+    - style – changes that do not affect the meaning of the code, likely related to code formatting such as white-space, missing semi-colons, and so on.
+
+    - test – including new or correcting previous tests
+
+    - perf – performance improvements
+
+    - ci – continuous integration related
+
+    - build – changes that affect the build system or external dependencies
+
+    - revert – reverts a previous commit
+
+Example:
+
+`feat: createded a function to remove all the redundant data`
