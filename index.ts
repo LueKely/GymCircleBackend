@@ -8,7 +8,7 @@ import userRoute from './src/routes/user';
 import admin from './src/routes/admin';
 import guest from './src/routes/guest';
 // database
-import db from './src/config/db';
+import pool from './src/config/db';
 // env
 import * as dotenv from 'dotenv';
 dotenv.config();
@@ -17,12 +17,13 @@ const port = 3000;
 const app: Express = express();
 
 // db from the  database
-db.connect((error) => {
+pool.getConnection((error, connection) => {
 	if (error) {
 		console.error('Unable to connect to the database:', error);
 	} else {
 		console.log('Database connection established.');
 	}
+	connection.release();
 });
 
 // init the middleware

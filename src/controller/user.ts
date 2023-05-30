@@ -1,38 +1,24 @@
 import { NextFunction, Request, Response } from 'express';
-import connection from '../config/db';
+import { sqlExe } from '../config/db';
 
 export default {
 	// get info
 	async getUserInfo(req: Request, res: Response, next: NextFunction) {
-		await connection.query(
-			`SELECT * FROM tbl_user WHERE user_id = ${req.params.id};`,
-			(error, results) => {
-				if (error) {
-					console.error('Error executing query:', error);
-					res.status(500).json({ error: 'Internal Server Error' });
-				} else {
-					res.json(results);
-				}
-			}
-		);
+		const id = req.params.id;
+		const data = await sqlExe('SELECT * FROM tbl_user WHERE user_id = ?;', id);
+		res.send(data[0]).status(200);
 	},
+
 	// post transaction
 
 	// update
 	async updateInfo(req: Request, res: Response, next: NextFunction) {
+		const id = req.params.id;
 		const { name, age } = req.body;
-
-		await connection.query(
-			'UPDATE tbl_user SET name = ?, age = ? WHERE user_id = ?; ',
-			[name, age, req.params.id],
-			(error, results) => {
-				if (error) {
-					console.error('Error executing query:', error);
-					res.status(500).json({ error: 'Internal Server Error' });
-				} else {
-					res.json(results);
-				}
-			}
+		const data = await sqlExe(
+			'UPDATE tbl_user SET name = ?, age = ? WHERE user_id = ?;',
+			[name, age, id]
 		);
+		res.send(data[0]).status(200);
 	},
 };
