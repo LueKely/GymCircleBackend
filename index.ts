@@ -35,11 +35,6 @@ app.listen(port, () => {
 	console.log(`now listening on port ${port}`);
 });
 
-app.get('/', (req: Request, res: Response) => {
-	console.log(process.env.POOP);
-	res.send('hello');
-});
-
 app.use('/user', userRoute);
 app.use('/admin', admin);
 app.use('/guest', guest);

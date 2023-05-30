@@ -18,12 +18,16 @@
 
 ### index.ts
 
-- this is where the magic where all the routes are imported and stuff
+- this is where the magic happens, where all the routes are imported and stuff
 
 ### .env
 
 - this is not available in our repo for i added it in the git ignore
   just pm me for the .env this is crucial btw.
+
+  #### how to use
+
+  - just add `process.env."environment name"`
 
 ### /public
 
@@ -49,9 +53,13 @@
 
   - this is where the database connections lies
 
+  #### /controller
+
+  - this is where all the functions are stored for the corresponding routes
+
 # Lue's guide to commit messages:
 
-When adding a commit message add this prefix and the details of your commits.
+When adding a commit message add this prefix and the a brief details of your commits for the heading. Then follow up with a full extent of your added feature in the body
 
     - feat – a new feature is introduced with the changes
 
@@ -76,5 +84,4 @@ When adding a commit message add this prefix and the details of your commits.
     - revert – reverts a previous commit
 
 Example:
-
 `feat: createded a function to remove all the redundant data`
