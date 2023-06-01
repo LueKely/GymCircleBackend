@@ -1,15 +1,14 @@
 import express, { NextFunction, Request, Response } from 'express';
+import login from '../controller/login';
+import { middleman } from '../middleware/middleman';
+const loginRouter = express.Router();
 
-const router = express.Router();
-
-// middleware that is specific to this router
-router.use((req: Request, res: Response, next: NextFunction) => {
+// middleware that is specific to this LogInrouter
+loginRouter.use((req: Request, res: Response, next: NextFunction) => {
 	next();
 });
 
 // define the home page route
-router.get('/', (req: Request, res: Response) => {
-	res.send('login page');
-});
-
-module.exports = router;
+loginRouter.get('/', middleman(login.register));
+loginRouter.get('/compare', middleman(login.comparePassword));
+export default loginRouter;

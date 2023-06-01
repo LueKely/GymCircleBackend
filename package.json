@@ -27,6 +27,7 @@
 		"typescript": "^5.0.4"
 	},
 	"devDependencies": {
+		"@types/bcrypt": "^5.0.0",
 		"@types/mysql": "^2.15.21",
 		"nodemon": "^2.0.22"
 	}

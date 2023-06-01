@@ -7,6 +7,7 @@ import { notFoundHandler } from './src/middleware/middleman';
 import userRoute from './src/routes/user';
 import admin from './src/routes/admin';
 import guest from './src/routes/guest';
+import loginRouter from './src/routes/login';
 // database
 import pool from './src/config/db';
 // env
@@ -39,3 +40,4 @@ app.listen(port, () => {
 app.use('/user', userRoute);
 app.use('/admin', admin);
 app.use('/guest', guest);
+app.use('/login', loginRouter);
