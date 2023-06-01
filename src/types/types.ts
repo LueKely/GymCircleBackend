@@ -1,12 +1,14 @@
-export interface User {
-	UserID: number;
+export interface Admin {}
+
+export interface LogIn {
 	Name: string;
-	UserName: string;
+	userName: string;
+	password: string;
 	Age: number;
 	Address: string;
 	tier: string;
 	Points: number;
 }
-
-export interface Admin {}
-export interface LogIn {}
+export interface User extends LogIn {
+	UserID: number;
+}
