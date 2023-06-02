@@ -7,6 +7,7 @@ export default {
 	async register(req: Request, res: Response, next: NextFunction) {
 		const user: LogIn = req.body;
 
+		// encrypt password
 		const genSalt = await bcrypt.hash(user.password, 10).then(function (hash) {
 			return hash;
 		});
