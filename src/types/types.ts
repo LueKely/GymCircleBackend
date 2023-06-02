@@ -2,7 +2,7 @@ export interface Admin {}
 
 export interface LogIn {
 	Name: string;
-	userName: string;
+	userEmail: string;
 	password: string;
 	Age: number;
 	Address: string;

@@ -11,12 +11,12 @@ export default {
 		const genSalt = await bcrypt.hash(user.password, 10).then(function (hash) {
 			return hash;
 		});
-
+		// note di ko inaad ung user_id
 		const data = await sqlExe(
-			'INSERT INTO user (name,username,password,age,address,tier,points) VALUES (?,?,?,?,?,?,?)',
+			'INSERT INTO user (name,email,password,age,address,tier,points) VALUES (?,?,?,?,?,?,?)',
 			[
 				user.Name,
-				user.userName,
+				user.userEmail,
 				genSalt,
 				user.Age,
 				user.Address,
