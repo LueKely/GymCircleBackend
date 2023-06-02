@@ -3,7 +3,7 @@ import { sqlExe } from '../config/db';
 import bcrypt from 'bcrypt';
 import { LogIn } from '../types/types';
 export default {
-	// put info
+	// put register user
 	async register(req: Request, res: Response, next: NextFunction) {
 		const user: LogIn = req.body;
 
@@ -11,14 +11,19 @@ export default {
 			return hash;
 		});
 
-		const data = await sqlExe('', [
-			user.userName,
-			user.password,
-			user.Age,
-			user.Address,
-		]);
+		const data = await sqlExe(
+			'INSERT INTO user (name,username,password,age,address,tier,points) VALUES (?,?,?,?,?,?,?)',
+			[
+				user.Name,
+				user.userName,
+				genSalt,
+				user.Age,
+				user.Address,
+				user.tier,
+				user.Points,
+			]
+		);
 
-		// dapat ipupush to alright sa db?
 		res.send('successful').status(200);
 	},
 
