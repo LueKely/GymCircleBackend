@@ -1,17 +1,19 @@
 import { NextFunction, Request, Response } from 'express';
 import { sqlExe } from '../config/db';
+import { Register } from '../types/types';
+
 import bcrypt from 'bcrypt';
-import { LogIn } from '../types/types';
+
 export default {
 	// put register user
 	async register(req: Request, res: Response, next: NextFunction) {
-		const user: LogIn = req.body;
+		const user: Register = req.body;
 
 		// encrypt password
 		const genSalt = await bcrypt.hash(user.password, 10).then(function (hash) {
 			return hash;
 		});
-		// note di ko inaad ung user_id
+		// foot note: di ko inaad ung user_id
 		const data = await sqlExe(
 			'INSERT INTO user (name,email,password,age,address,tier,points) VALUES (?,?,?,?,?,?,?)',
 			[
@@ -28,12 +30,16 @@ export default {
 		res.send('successful').status(200);
 	},
 
-	// log in
+	// compare the password
 	async comparePassword(req: Request, res: Response, next: NextFunction) {
-		const compare = await bcrypt.compare(
-			req.body.password,
-			'$2b$10$P1MD1aEyhkt3wpan4ZE7Yun6GTDg1EhCoRsj.SA6iCVYNAdiXmvLS'
-		);
+		const id = req.body.id;
+		const password = req.body.password;
+		// get hash from db
+		const hash = await sqlExe('SELECT password FROM user WHERE user_id = ?', [
+			id,
+		]);
+		// compare hash from request input
+		const compare = await bcrypt.compare(password, hash[0].password);
 
 		res.send(compare);
 	},
