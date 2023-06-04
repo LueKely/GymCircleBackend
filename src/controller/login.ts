@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { sqlExe } from '../config/db';
 import { Register } from '../types/types';
-
+import { Login } from '../types/types';
 import bcrypt from 'bcrypt';
 
 export default {
@@ -31,16 +31,19 @@ export default {
 	},
 
 	// compare the password
-	async comparePassword(req: Request, res: Response, next: NextFunction) {
-		const id = req.body.id;
-		const password = req.body.password;
+	async logInReq(req: Request, res: Response, next: NextFunction) {
+		const user: Login = req.body;
 		// get hash from db
-		const hash = await sqlExe('SELECT password FROM user WHERE user_id = ?', [
-			id,
+		const hash = await sqlExe('SELECT password FROM user WHERE email = ?', [
+			user.userEmail,
 		]);
 		// compare hash from request input
-		const compare = await bcrypt.compare(password, hash[0].password);
+		const compare = await bcrypt.compare(user.password, hash[0].password);
 
-		res.send(compare);
+		if (compare == false) {
+			res.sendStatus(400);
+		} else {
+			res.send(compare);
+		}
 	},
 };

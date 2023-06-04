@@ -10,5 +10,5 @@ loginRouter.use((req: Request, res: Response, next: NextFunction) => {
 
 // define the home page route
 loginRouter.put('/register', middleman(login.register));
-loginRouter.get('/compare', middleman(login.comparePassword));
+loginRouter.get('/', middleman(login.logInReq));
 export default loginRouter;
