@@ -3,6 +3,7 @@ import { sqlExe } from '../config/db';
 import { Register } from '../types/types';
 import { Login } from '../types/types';
 import bcrypt from 'bcrypt';
+import { error } from 'console';
 
 export default {
 	// put register user
@@ -33,17 +34,24 @@ export default {
 	// compare the password
 	async logInReq(req: Request, res: Response, next: NextFunction) {
 		const user: Login = req.body;
+
 		// get hash from db
+
 		const hash = await sqlExe('SELECT password FROM user WHERE email = ?', [
 			user.userEmail,
 		]);
-		// compare hash from request input
-		const compare = await bcrypt.compare(user.password, hash[0].password);
 
-		if (compare == false) {
-			res.sendStatus(400);
+		if (hash.length == 0) {
+			res.status(400).send('Invalid Email');
 		} else {
-			res.send(compare);
+			// compare hash from request input
+			const compare = await bcrypt.compare(user.password, hash[0].password);
+
+			if (compare == false) {
+				res.status(400).send('Invalid password');
+			} else {
+				res.send(compare);
+			}
 		}
 	},
 };
