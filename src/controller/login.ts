@@ -1,9 +1,9 @@
+import jwt from 'jsonwebtoken';
 import { NextFunction, Request, Response } from 'express';
 import { sqlExe } from '../config/db';
 import { Register } from '../types/types';
 import { Login } from '../types/types';
 import bcrypt from 'bcrypt';
-import { error } from 'console';
 
 export default {
 	// put register user
@@ -36,7 +36,6 @@ export default {
 		const user: Login = req.body;
 
 		// get hash from db
-
 		const hash = await sqlExe('SELECT password FROM user WHERE email = ?', [
 			user.userEmail,
 		]);
@@ -50,7 +49,18 @@ export default {
 			if (compare == false) {
 				res.status(400).send('Invalid password');
 			} else {
-				res.send(compare);
+				// do your gay shit here
+				const authUser = { userName: req.body, permission: 'user' };
+				const key: string | undefined = process.env.SECRETKEY;
+
+				if (!key) {
+					// Handle the case where the SECRETKEY is not defined
+					throw new Error(
+						'SECRETKEY is not defined in the environment variables.'
+					);
+				} else {
+					res.send(jwt.sign(authUser, key, { expiresIn: '3d' }));
+				}
 			}
 		}
 	},
