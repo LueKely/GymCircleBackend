@@ -15,3 +15,8 @@ export interface Register extends Login {
 export interface User extends Register {
 	UserID: number;
 }
+
+export interface DecodedToken {
+	userName: string;
+	permission: string;
+}
