@@ -33,7 +33,7 @@ export default {
 
 	// compare the password
 	async logInReq(req: Request, res: Response, next: NextFunction) {
-		const user = req.body;
+		const user: Login = req.body;
 
 		// get hash from db
 		const query = 'SELECT password FROM user WHERE email = ?';
