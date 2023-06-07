@@ -33,35 +33,33 @@ export default {
 
 	// compare the password
 	async logInReq(req: Request, res: Response, next: NextFunction) {
-		const user: Login = req.body;
+		const user = req.body;
 
 		// get hash from db
-		const hash = await sqlExe('SELECT password FROM user WHERE email = ?', [
-			user.userEmail,
-		]);
+		const query = 'SELECT password FROM user WHERE email = ?';
+		const params = [user.userEmail];
+		const hash = await sqlExe(query, params);
 
-		if (hash.length == 0) {
-			res.status(400).send('Invalid Email');
-		} else {
-			// compare hash from request input
-			const compare = await bcrypt.compare(user.password, hash[0].password);
-
-			if (compare == false) {
-				res.status(400).send('Invalid password');
-			} else {
-				// do your gay shit here
-				const authUser = { userName: req.body, permission: 'user' };
-				const key: string | undefined = process.env.SECRETKEY;
-
-				if (!key) {
-					// Handle the case where the SECRETKEY is not defined
-					throw new Error(
-						'SECRETKEY is not defined in the environment variables.'
-					);
-				} else {
-					res.send(jwt.sign(authUser, key, { expiresIn: '3d' }));
-				}
-			}
+		if (hash.length === 0) {
+			return res.status(400).send('Invalid Email');
 		}
+
+		// compare hash from request input
+		const compare = await bcrypt.compare(user.password, hash[0].password);
+
+		if (!compare) {
+			return res.status(400).send('Invalid password');
+		}
+
+		// Generate token
+		const authUser = { userName: user, permission: 'user' };
+		const key = process.env.SECRETKEY;
+
+		if (!key) {
+			throw new Error('SECRETKEY is not defined in the environment variables.');
+		}
+
+		const token = jwt.sign(authUser, key, { expiresIn: '3d' });
+		res.send(token);
 	},
 };
