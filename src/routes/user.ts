@@ -1,16 +1,14 @@
 import express, { NextFunction, Request, Response } from 'express';
 import user from '../controller/user';
 import { middleman } from '../middleware/middleman';
-
+import { validateRequest } from '../utils/validation';
 const userRoute = express.Router();
 
 // middleware
-userRoute.use((req: Request, res: Response, next: NextFunction) => {
-	next();
-});
+userRoute.use(validateRequest);
 
 userRoute.get('/', (req: Request, res: Response) => {
-	console.log();
+	console.log('tanginamo');
 	res.send(req.body.test + ' ' + req.headers.key);
 });
 
@@ -24,5 +22,12 @@ userRoute.patch('/:id', middleman(user.updateInfo));
 userRoute.post('/:id/transaction', (req: Request, res: Response) => {
 	res.send('transaction gaming');
 });
+
+userRoute.post(
+	'/poo',
+	middleman((req: Request, res: Response) => {
+		res.send(req.headers.authorization);
+	})
+);
 
 export default userRoute;

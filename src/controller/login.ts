@@ -52,7 +52,7 @@ export default {
 		}
 
 		// Generate token
-		const authUser = { userName: user, permission: 'user' };
+		const authUser = { payload: user, permission: 'user' };
 		const key = process.env.SECRETKEY;
 
 		if (!key) {
