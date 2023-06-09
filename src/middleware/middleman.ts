@@ -1,8 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 
 export function middleman(handler: Function) {
-	console.log('i am middleman');
-
 	return async function (req: Request, res: Response, next: NextFunction) {
 		try {
 			await handler(req, res, next);
