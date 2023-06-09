@@ -2,6 +2,7 @@ import express, { NextFunction, Request, Response } from 'express';
 import user from '../controller/user';
 import { middleman } from '../middleware/middleman';
 import { validateRequest } from '../utils/validation';
+
 const userRoute = express.Router();
 
 // middleware
@@ -26,6 +27,7 @@ userRoute.post('/:id/transaction', (req: Request, res: Response) => {
 userRoute.post(
 	'/poo',
 	middleman((req: Request, res: Response) => {
+		console.log(req.body);
 		res.send(req.headers.authorization);
 	})
 );
