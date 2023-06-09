@@ -21,7 +21,7 @@ export function validateRequest(
 			return res.status(403).json({ error: 'Permission denied' });
 		}
 		// User has the required permission, allow access to the protected route
-		req.body.payload = decoded.payload.userEmail;
+		req.body.payload = decoded.payload;
 		next();
 	});
 }
