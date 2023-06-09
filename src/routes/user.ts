@@ -13,9 +13,6 @@ userRoute.get('/', (req: Request, res: Response) => {
 	res.status(200);
 });
 
-// get info
-userRoute.get('/:id', middleman(user.getUserInfo));
-
 // update your info
 userRoute.patch('/:id', middleman(user.updateInfo));
 
@@ -24,7 +21,7 @@ userRoute.post('/:id/transaction', (req: Request, res: Response) => {
 	res.send('transaction gaming');
 });
 
-// get user data
-userRoute.post('/poo', middleman(user.getInfo));
+// get user info
+userRoute.post('/info', middleman(user.getInfo));
 
 export default userRoute;
