@@ -10,7 +10,7 @@ userRoute.use(validateRequest);
 
 userRoute.get('/', (req: Request, res: Response) => {
 	console.log('tanginamo');
-	res.send(req.body.test + ' ' + req.headers.key);
+	res.status(200);
 });
 
 // get info
@@ -24,12 +24,7 @@ userRoute.post('/:id/transaction', (req: Request, res: Response) => {
 	res.send('transaction gaming');
 });
 
-userRoute.post(
-	'/poo',
-	middleman((req: Request, res: Response) => {
-		console.log(req.body);
-		res.send(req.headers.authorization);
-	})
-);
+// get user data
+userRoute.post('/poo', middleman(user.getInfo));
 
 export default userRoute;

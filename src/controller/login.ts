@@ -36,7 +36,7 @@ export default {
 		const user: Login = req.body;
 
 		// get hash from db
-		const query = 'SELECT password FROM user WHERE email = ?';
+		const query = 'SELECT password, user_id FROM user WHERE email = ?';
 		const params = [user.userEmail];
 		const hash = await sqlExe(query, params);
 
@@ -52,7 +52,7 @@ export default {
 		}
 
 		// Generate token
-		const authUser = { payload: user, permission: 'user' };
+		const authUser = { payload: hash[0].user_id, permission: 'user' };
 		const key = process.env.SECRETKEY;
 
 		if (!key) {
@@ -60,6 +60,8 @@ export default {
 		}
 
 		const token = jwt.sign(authUser, key, { expiresIn: '3d' });
+		// console.log(hash[0].user_id);
+
 		res.send(token);
 	},
 };
