@@ -1,8 +1,29 @@
 import { NextFunction, Request, Response } from 'express';
 import { sqlExe } from '../config/db';
-
+import crypto from 'crypto';
+import { Transaction } from '../types/types';
 export default {
 	// post transaction
+
+	async generateTransaction(req: Request, res: Response) {
+		const userId = req.body.payload;
+
+		const transactionInfo: Transaction = {
+			id: crypto.randomUUID(),
+			transactionName: req.body.name,
+			type: req.body.type,
+			buyerId: userId,
+			status: 'not paid',
+			date: new Date().toLocaleDateString('en-US'),
+		};
+
+		const infoToArray = Object.values(transactionInfo);
+
+		const query: string = 'INSERT INTO transaction_history VALUES(?,?,?,?,?,?)';
+		const data = await sqlExe(query, [...infoToArray]);
+
+		res.send(transactionInfo.id);
+	},
 
 	// update
 	async updateInfo(req: Request, res: Response, next: NextFunction) {

@@ -8,20 +8,13 @@ const userRoute = express.Router();
 // middleware
 userRoute.use(validateRequest);
 
-userRoute.get('/', (req: Request, res: Response) => {
-	console.log('tanginamo');
-	res.status(200);
-});
-
 // update your info
 userRoute.patch('/', middleman(user.updateInfo));
 
 // userRoute post request
-userRoute.post('/:id/transaction', (req: Request, res: Response) => {
-	res.send('transaction gaming');
-});
+userRoute.put('/transaction', middleman(user.generateTransaction));
 
 // get user info
-userRoute.post('/info', middleman(user.getInfo));
+userRoute.get('/info', middleman(user.getInfo));
 
 export default userRoute;
