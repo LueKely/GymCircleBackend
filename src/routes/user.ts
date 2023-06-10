@@ -14,7 +14,7 @@ userRoute.get('/', (req: Request, res: Response) => {
 });
 
 // update your info
-userRoute.patch('/:id', middleman(user.updateInfo));
+userRoute.patch('/', middleman(user.updateInfo));
 
 // userRoute post request
 userRoute.post('/:id/transaction', (req: Request, res: Response) => {
