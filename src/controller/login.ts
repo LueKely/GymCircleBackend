@@ -9,6 +9,10 @@ export default {
 	// put register user
 	async register(req: Request, res: Response, next: NextFunction) {
 		const user: Register = req.body;
+		// compare emails TO DO: make this a seperate shit
+		const emailQuery = 'SELECT COUNT(*) AS sameEmail FROM user';
+		const emails = await sqlExe(emailQuery, user.userEmail);
+		console.log(emails);
 
 		// encrypt password
 		const genSalt = await bcrypt.hash(user.password, 10).then(function (hash) {
