@@ -9,9 +9,10 @@ export interface Register extends Login {
 	Name: string;
 	Age: number;
 	Address: string;
-	tier: string;
+	Tier: string;
 	Points: number;
 }
+// not used
 export interface User extends Register {
 	UserID: number;
 }

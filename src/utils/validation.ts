@@ -1,8 +1,9 @@
 import { NextFunction, Request, Response } from 'express';
+import { sqlExe } from '../config/db';
 import jwt from 'jsonwebtoken';
 // to do: refactor this hunk of junk
 
-export function validateRequest(
+export async function validateRequest(
 	req: Request,
 	res: Response,
 	next: NextFunction
@@ -24,4 +25,20 @@ export function validateRequest(
 		req.body.payload = decoded.payload;
 		next();
 	});
+}
+
+export async function validateEmail(
+	req: Request,
+	res: Response,
+	next: NextFunction
+) {
+	const emailRequest = req.body.userEmail;
+	const emailQuery = 'SELECT COUNT(email) AS count FROM user WHERE email = ?';
+	const emailsCount = await sqlExe(emailQuery, [emailRequest]);
+
+	if (emailsCount[0].count > 0) {
+		return res.status(409).json({ error: 'Username already taken' });
+	} else {
+		return next();
+	}
 }

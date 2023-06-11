@@ -18,7 +18,6 @@ export default {
 		};
 
 		const infoToArray = Object.values(transactionInfo);
-
 		const query: string = 'INSERT INTO transaction_history VALUES(?,?,?,?,?,?)';
 		const data = await sqlExe(query, [...infoToArray]);
 
