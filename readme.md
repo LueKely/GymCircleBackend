@@ -87,12 +87,3 @@ Example:
 `feat: createded a function to remove all the redundant data`
 
 ## DUMP
-
-{"Name": "lue",
-"userEmail":"super lue",
-"password":"poop",
-"Age":5,
-"Address":"nigga street",
-"tier":"poor",
-"Points":5
-}

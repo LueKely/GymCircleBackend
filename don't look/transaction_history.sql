@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 13, 2023 at 11:54 AM
+-- Generation Time: Jun 13, 2023 at 12:27 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.0.25
 
@@ -53,7 +53,18 @@ INSERT INTO `transaction_history` (`id`, `name`, `type`, `buyer_id`, `date`, `st
 -- Indexes for table `transaction_history`
 --
 ALTER TABLE `transaction_history`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `buyer_id` (`buyer_id`);
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `transaction_history`
+--
+ALTER TABLE `transaction_history`
+  ADD CONSTRAINT `transaction_history_ibfk_1` FOREIGN KEY (`buyer_id`) REFERENCES `user` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
