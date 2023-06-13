@@ -24,47 +24,36 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Table structure for table `transaction_history`
 --
 
-CREATE TABLE `user` (
-  `user_id` int(11) NOT NULL,
+CREATE TABLE `transaction_history` (
+  `id` varchar(100) NOT NULL,
   `name` varchar(100) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `password` varchar(100) NOT NULL,
-  `age` int(11) NOT NULL,
-  `address` varchar(100) NOT NULL,
-  `tier` varchar(50) NOT NULL,
-  `points` int(11) NOT NULL
+  `type` varchar(100) NOT NULL,
+  `buyer_id` int(100) NOT NULL,
+  `date` varchar(100) NOT NULL,
+  `status` varchar(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `user`
+-- Dumping data for table `transaction_history`
 --
 
-INSERT INTO `user` (`user_id`, `name`, `email`, `password`, `age`, `address`, `tier`, `points`) VALUES
-(8, 'new', 'super lue', '$2b$10$zzGsJFbPYy5iavQP0yb2OOIWKLEiWApYvGbrgRoqOezrDElZbkUa6', 100, 'what', 'poor', 5),
-(10, 'not lue', 'super not lue', '$2b$10$hRe5Bi/LMm2jOwMt5.MweOl5ZYjzlqq1GOJCAfGiPtRB44wKQk/AK', 100, 'no where', 'rich', 0);
+INSERT INTO `transaction_history` (`id`, `name`, `type`, `buyer_id`, `date`, `status`) VALUES
+('48bd9b0c-2d84-491c-9d16-020885bc70bd', 'testing', 'subscription', 8, 'not paid', '6/10/2023'),
+('ad1d8b5d-8821-4129-ab99-b7026d12d014', 'testing', 'subscription', 8, 'not paid', '6/10/2023'),
+('b3445510-055d-46c7-bcc7-137a90aadcab', 'testing', 'subscription', 8, 'not paid', '6/10/2023');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `user`
+-- Indexes for table `transaction_history`
 --
-ALTER TABLE `user`
-  ADD PRIMARY KEY (`user_id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `user`
---
-ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+ALTER TABLE `transaction_history`
+  ADD PRIMARY KEY (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
