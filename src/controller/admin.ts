@@ -38,4 +38,5 @@ export default {
 
 		res.status(200).send('SUCCESS');
 	},
+	async registerAdmin(req: Request, res: Response, next: NextFunction) {},
 };
