@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { sqlExe } from '../config/db';
 import jwt from 'jsonwebtoken';
+
 // to do: refactor this hunk of junk
 
 export async function validateRequest(
@@ -23,6 +24,32 @@ export async function validateRequest(
 		}
 		// User has the required permission, allow access to the protected route
 		req.body.payload = decoded.payload;
+		next();
+	});
+}
+
+export async function middlewarePhrase(
+	req: Request,
+	res: Response,
+	next: NextFunction
+) {
+	console.log('i am working');
+
+	const token = req.headers.authorization;
+	if (!token) {
+		return res.status(401).json({ error: 'No token provided' });
+	}
+	// Verify the token
+	// to do: tanggalin ang pinagbabawal na techinique
+	jwt.verify(token, process.env.SECRETKEY!, (err, decoded: any) => {
+		if (err) {
+			return res.status(401).json({ error: 'Invalid token' });
+		}
+		if (!decoded || decoded.permission !== 'admin') {
+			return res.status(403).json({ error: 'Permission denied' });
+		}
+		// User has the required permission, allow access to the protected route
+		// req.body.payload = decoded.payload;
 		next();
 	});
 }

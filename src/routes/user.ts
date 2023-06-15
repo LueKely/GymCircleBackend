@@ -15,6 +15,6 @@ userRoute.patch('/', middleman(user.updateInfo));
 userRoute.put('/transaction', middleman(user.generateTransaction));
 
 // get user info
-userRoute.get('/info', middleman(user.getInfo));
+userRoute.get('/', middleman(user.getInfo));
 
 export default userRoute;
