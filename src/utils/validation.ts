@@ -75,7 +75,7 @@ export async function validateAdmin(
 			return res.status(403).json({ error: 'Permission denied' });
 		}
 		// User has the required permission, allow access to the protected route
-		// req.body.payload = decoded.payload;
+		req.body.payload = decoded.payload;
 		next();
 	});
 }
@@ -87,6 +87,24 @@ export async function validateEmail(
 ) {
 	const emailRequest = req.body.userEmail;
 	const emailQuery = 'SELECT COUNT(email) AS count FROM user WHERE email = ?';
+	const emailsCount = await sqlExe(emailQuery, [emailRequest]);
+
+	if (emailsCount[0].count > 0) {
+		return res.status(409).json({ error: 'Username already taken' });
+	} else {
+		return next();
+	}
+}
+
+export async function validateEmailAdmin(
+	req: Request,
+	res: Response,
+	next: NextFunction
+) {
+	console.log('test');
+
+	const emailRequest = req.body.userEmail;
+	const emailQuery = 'SELECT COUNT(email) AS count FROM admin WHERE email = ?';
 	const emailsCount = await sqlExe(emailQuery, [emailRequest]);
 
 	if (emailsCount[0].count > 0) {

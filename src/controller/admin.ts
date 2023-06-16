@@ -41,8 +41,9 @@ export default {
 	},
 	async registerAdmin(req: Request, res: Response, next: NextFunction) {
 		const admin: Admin = req.body;
+
 		const query: string =
-			'INSERT INTO admin (name,email,password) VALUES (?, ?, ? ) ;';
+			'INSERT INTO admin (email,name,password) VALUES (?, ?, ? ) ;';
 
 		const genSalt = await bcrypt.hash(admin.password, 10).then(function (hash) {
 			return hash;
