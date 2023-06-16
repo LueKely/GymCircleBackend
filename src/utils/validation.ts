@@ -33,7 +33,7 @@ export async function middlewarePhrase(
 	res: Response,
 	next: NextFunction
 ) {
-	console.log('i am working');
+	console.log('wtf');
 
 	const token = req.headers.authorization;
 	if (!token) {
@@ -46,6 +46,32 @@ export async function middlewarePhrase(
 			return res.status(401).json({ error: 'Invalid token' });
 		}
 		if (!decoded || decoded.permission !== 'admin') {
+			return res.status(403).json({ error: 'Permission denied' });
+		}
+		// User has the required permission, allow access to the protected route
+		// req.body.payload = decoded.payload;
+		next();
+	});
+}
+
+export async function validateAdmin(
+	req: Request,
+	res: Response,
+	next: NextFunction
+) {
+	console.log('i am working');
+
+	const token = req.headers.authorization;
+	if (!token) {
+		return res.status(401).json({ error: 'No token provided' });
+	}
+	// Verify the token
+	// to do: tanggalin ang pinagbabawal na techinique
+	jwt.verify(token, process.env.SECRETKEY!, (err, decoded: any) => {
+		if (err) {
+			return res.status(401).json({ error: 'Invalid token' });
+		}
+		if (!decoded || decoded.permission !== 'admin login') {
 			return res.status(403).json({ error: 'Permission denied' });
 		}
 		// User has the required permission, allow access to the protected route

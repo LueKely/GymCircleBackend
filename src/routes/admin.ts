@@ -4,16 +4,17 @@ import { middlewarePhrase } from '../utils/validation';
 import { middleman } from '../middleware/middleman';
 const admin = express.Router();
 
-// define the home page route
+// enter phrase to get token
 admin.get('/phrase', middleman(adminController.validatePhrase));
+// change phrase
 admin.patch(
 	'/phrase',
 	middlewarePhrase,
 	middleman(adminController.changePhrase)
 );
-// define the user id route
-admin.get('/:id', (req: Request, res: Response) => {
-	res.send(`Hello Admin no. ${req.params.id}`);
-});
+// log in
+admin.post('/', middlewarePhrase, middleman(adminController.loginAdmin));
+// register
+admin.put('/', middlewarePhrase, middleman(adminController.registerAdmin));
 
 export default admin;

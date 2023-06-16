@@ -1,4 +1,8 @@
-export interface Admin {}
+export interface Admin {
+	userEmail: string;
+	name: string;
+	password: string;
+}
 
 export interface Login {
 	userEmail: string;
