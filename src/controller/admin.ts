@@ -1,8 +1,10 @@
-import { NextFunction, Request, Response } from 'express';
-import { sqlExe } from '../config/db';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+
+import { NextFunction, Request, Response } from 'express';
+import { sqlExe } from '../config/db';
 import { Admin } from '../types/types';
+import { EditUser } from '../types/types';
 
 export default {
 	async validatePhrase(req: Request, res: Response, next: NextFunction) {
@@ -82,5 +84,41 @@ export default {
 		const token = jwt.sign(authAdmin, key, { expiresIn: '3d' });
 
 		res.send(token);
+	},
+	async getAllUsers(req: Request, res: Response, next: NextFunction) {
+		const query: string = 'SELECT * FROM user';
+		const data = await sqlExe(query);
+		res.send(data);
+	},
+	async updateUser(req: Request, res: Response, next: NextFunction) {
+		const user: EditUser = req.body;
+		const query: string =
+			'UPDATE user SET  name = ?, email = ?, age = ?, address = ?, tier = ? , points = ? WHERE user_id = ? ';
+
+		await sqlExe(query, Object.values(user));
+
+		res.send('successful');
+	},
+	async deleteUser(req: Request, res: Response, next: NextFunction) {
+		const userId = req.params.id;
+		const query: string = 'DELETE FROM user WHERE user_id = ?';
+
+		await sqlExe(query, [userId]);
+
+		res.send('SUCCESS');
+	},
+	async getAllTransactions(req: Request, res: Response, next: NextFunction) {
+		const query = 'SELECT * FROM transaction_history ';
+		const data = await sqlExe(query);
+		res.send(data);
+	},
+	// TO DO test this shit
+	async updateTransaction(req: Request, res: Response, next: NextFunction) {
+		const query = 'UPDATE transaction_history SET status = ? WHERE id = ? ';
+		const newStatus: 'paid' | 'not paid' = req.body.status;
+		const id = req.body.id;
+		if (!newStatus) return res.status(400);
+		await sqlExe(query, [query, id]);
+		res.send('nice');
 	},
 };
