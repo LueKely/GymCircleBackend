@@ -16,8 +16,13 @@ export interface Register extends Login {
 	Tier: string;
 	Points: number;
 }
-// not used
-export interface User extends Register {
+export interface EditUser {
+	Name: string;
+	userEmail: string;
+	Age: number;
+	Address: string;
+	Tier: string;
+	Points: number;
 	UserID: number;
 }
 // not used
