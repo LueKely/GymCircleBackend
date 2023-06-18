@@ -86,7 +86,8 @@ export default {
 		res.send(token);
 	},
 	async getAllUsers(req: Request, res: Response, next: NextFunction) {
-		const query: string = 'SELECT * FROM user';
+		const query: string =
+			'SELECT * FROM user JOIN attendance ON user.user_id = attendance.user_id';
 		const data = await sqlExe(query);
 		res.send(data);
 	},
