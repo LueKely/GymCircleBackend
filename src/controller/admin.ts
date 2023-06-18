@@ -112,13 +112,15 @@ export default {
 		const data = await sqlExe(query);
 		res.send(data);
 	},
-	// TO DO test this shit
 	async updateTransaction(req: Request, res: Response, next: NextFunction) {
 		const query = 'UPDATE transaction_history SET status = ? WHERE id = ? ';
-		const newStatus: 'paid' | 'not paid' = req.body.status;
-		const id = req.body.id;
-		if (!newStatus) return res.status(400);
-		await sqlExe(query, [query, id]);
-		res.send('nice');
+		const newStatus: string = req.body.status;
+		const id = req.params.id;
+
+		if (newStatus != 'paid' && newStatus != 'not paid')
+			return res.sendStatus(400);
+
+		await sqlExe(query, [newStatus, id]);
+		res.send('Success');
 	},
 };
