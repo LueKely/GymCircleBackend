@@ -4,6 +4,7 @@ import { middlewarePhrase } from '../utils/validation';
 import { validateAdmin } from '../utils/validation';
 import { middleman } from '../middleware/middleman';
 import { validateEmailAdmin } from '../utils/validation';
+
 const admin = express.Router();
 
 // enter phrase to get token
@@ -35,5 +36,10 @@ admin.get(
 	middleman(adminController.getAllTransactions)
 );
 // update transaction
-admin.patch('/transaction/:id', middleman(adminController.updateTransaction));
+admin.patch(
+	'/transaction/:id',
+	validateAdmin,
+	middleman(adminController.updateTransaction)
+);
+admin.patch('/attendance/:id', middleman(adminController.addAttendance));
 export default admin;

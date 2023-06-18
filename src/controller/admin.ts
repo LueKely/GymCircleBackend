@@ -123,4 +123,15 @@ export default {
 		await sqlExe(query, [newStatus, id]);
 		res.send('Success');
 	},
+	async addAttendance(req: Request, res: Response, next: NextFunction) {
+		const id = req.params.id;
+		const query = 'UPDATE attendance SET days = days+1 WHERE user_id = ?';
+		const data: any = await sqlExe(query, [id]);
+
+		if (data.affectedRows == 0) {
+			return res.sendStatus(400);
+		}
+
+		res.send('success');
+	},
 };
