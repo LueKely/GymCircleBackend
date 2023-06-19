@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import { sqlExe } from '../config/db';
 import crypto from 'crypto';
 import { Transaction } from '../types/types';
+
 export default {
 	// post transaction
 
@@ -41,7 +42,7 @@ export default {
 	async getInfo(req: Request, res: Response, next: NextFunction) {
 		const userId = req.body.payload;
 		const data = await sqlExe(
-			'SELECT name, email, age, address,tier,points FROM user WHERE user_id = ?;',
+			'SELECT user.user_id,user.name,user.email,user.age,user.address,user.tier,attendance.* FROM user JOIN attendance ON user.user_id = attendance.user_id WHERE user.user_id=?',
 			[userId]
 		);
 		res.send(data[0]).status(200);

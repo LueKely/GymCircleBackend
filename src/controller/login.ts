@@ -1,8 +1,9 @@
-import jwt from 'jsonwebtoken';
 import { NextFunction, Request, Response } from 'express';
 import { sqlExe } from '../config/db';
 import { Register } from '../types/types';
 import { Login } from '../types/types';
+import math from '../utils/math';
+import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 
 export default {
@@ -14,20 +15,24 @@ export default {
 		const genSalt = await bcrypt.hash(user.password, 10).then(function (hash) {
 			return hash;
 		});
-		// foot note: di ko inaad ung user_id
-		const data = await sqlExe(
-			'INSERT INTO user (name,email,password,age,address,tier,points) VALUES (?,?,?,?,?,?,?)',
-			[
-				user.Name,
-				user.userEmail,
-				genSalt,
-				user.Age,
-				user.Address,
-				user.Tier,
-				user.Points,
-			]
-		);
+		const generateId = math.generateId();
 
+		// foot note: di ko inaad ung user_id
+		const data = await sqlExe('INSERT INTO user VALUES (?,?,?,?,?,?,?,?)', [
+			generateId,
+			user.Name,
+			user.userEmail,
+			genSalt,
+			user.Age,
+			user.Address,
+			user.Tier,
+			user.Points,
+		]);
+
+		const attendance = await sqlExe('INSERT INTO attendance VALUES (?,?)', [
+			generateId,
+			0,
+		]);
 		res.send('successful').status(200);
 	},
 
