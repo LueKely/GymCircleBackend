@@ -41,5 +41,16 @@ admin.patch(
 	validateAdmin,
 	middleman(adminController.updateTransaction)
 );
-admin.patch('/attendance/:id', middleman(adminController.addAttendance));
+// update attendance
+admin.patch(
+	'/attendance/:id',
+	validateAdmin,
+	middleman(adminController.addAttendance)
+);
+// generate trn
+admin.post(
+	'/guest',
+	validateAdmin,
+	middleman(adminController.generateGuestTransactions)
+);
 export default admin;

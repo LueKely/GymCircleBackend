@@ -5,6 +5,7 @@ import { NextFunction, Request, Response } from 'express';
 import { sqlExe } from '../config/db';
 import { Admin } from '../types/types';
 import { EditUser } from '../types/types';
+import { Transaction } from '../types/types';
 
 export default {
 	async validatePhrase(req: Request, res: Response, next: NextFunction) {
@@ -134,5 +135,26 @@ export default {
 		}
 
 		res.send('success');
+	},
+	// guests have a buyer id of zero
+	async generateGuestTransactions(
+		req: Request,
+		res: Response,
+		next: NextFunction
+	) {
+		const transactionInfo: Transaction = {
+			id: crypto.randomUUID(),
+			transactionName: req.body.name,
+			type: 'subscription',
+			buyerId: 0,
+			status: 'paid',
+			date: new Date().toLocaleDateString('en-US'),
+		};
+
+		const infoToArray = Object.values(transactionInfo);
+		const query: string = 'INSERT INTO transaction_history VALUES(?,?,?,?,?,?)';
+		const data = await sqlExe(query, [...infoToArray]);
+
+		res.send(transactionInfo.id);
 	},
 };
