@@ -57,6 +57,10 @@
 
   - this is where all the functions are stored for the corresponding routes
 
+  #### /utils
+
+  - functions that are spread around the code base for utility
+
 # Lue's guide to commit messages:
 
 When adding a commit message add this prefix and the a brief details of your commits for the heading. Then follow up with a full extent of your added feature in the body
