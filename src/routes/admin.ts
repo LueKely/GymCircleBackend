@@ -29,7 +29,7 @@ admin.delete(
 	validateAdmin,
 	middleman(adminController.deleteUser)
 );
-// get all attendance
+// get all transactions
 admin.get(
 	'/transaction',
 	validateAdmin,
