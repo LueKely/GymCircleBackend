@@ -61,6 +61,109 @@
 
   - functions that are spread around the code base for utility
 
+### ROUTES 🚗
+  
+  #### LOGIN/REGISTER 🌲
+  - POST `api/login/`
+    - Query:
+      - userEmail: string
+      - password: string
+    - Response:
+      - the key that you will need to access the user route
+         
+  - PUT `api/login/register`
+    - Query:
+      - userName: string
+      - password: string
+      - Name: string
+      - Age: number
+      - Address: string
+      - Tier: string
+      - Points: number
+    - Purpose:
+      - registers user to the database
+  
+  #### USER 🤓
+  - GET `api/user/`
+    - Purpose:   
+      - this gets the data to the logged in user
+        
+  - PUT `api/user/transaction`
+      - Query:
+        - name: string (name of what you're buying)
+        - type: 'points' | 'subscription'
+      - Purpose:
+        - this posts a transaction receipt to the database
+  
+  - PATCH `api/user/`
+    - Query:
+      - name: string
+      - age: number
+      - address: string
+    - Purpose:
+      - updates the user info
+
+  #### ADMIN :godmode:
+  - GET `api/admin/phrase`
+    - Query:
+      - phrase: string
+    - Purpose: 
+      - This is the added security for admins
+
+  - PATCH `api/admin/phrase`
+    - Query:
+      - phrase: string
+    - Purpose:
+      - change the phrase
+      
+  - POST `api/admin/`
+    - this is for log in 
+    - Query:
+      - userName: string
+      - password: string
+
+  - PUT  `api/admin/`
+    - this is for registration
+    - Query:
+      - email: string
+      - name: string
+      - password: string
+  
+  - GET `api/admin/users`
+    - gets all users
+  
+  - PATCH `api/admin/users/:id`
+    - this updates the user given the id 
+    - Query:
+      -	Name: string
+	    - userEmail: string
+	    - Age: number
+	    - Address: string
+	    - Tier: string
+	    - Points: number
+	    - UserID: number
+    - Params:
+      - id: number
+  
+  - DELETE `api/admin/users/:id`
+    - deletes user given the id
+             
+  - GET `api/admin/transaction`
+    - gets all transactions from all users
+  
+  - PATCH `api/admin/transaction/:id`
+    - changes the status of the transaction
+    - Query:
+      - status: string
+
+  - PATCH `api/admin/attendance/:id`
+    - increments the user attendance
+  
+  - POST `api/guest`
+    - creates a transaction for guests (walk ins)
+    - Query:
+      - name: string (tier of subscription)             
+
 # Lue's guide to commit messages:
 
 When adding a commit message add this prefix and the a brief details of your commits for the heading. Then follow up with a full extent of your added feature in the body
@@ -90,4 +193,4 @@ When adding a commit message add this prefix and the a brief details of your com
 Example:
 `feat: createded a function to remove all the redundant data`
 
-## DUMP
+
