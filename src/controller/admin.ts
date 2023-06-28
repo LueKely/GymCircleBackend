@@ -157,4 +157,15 @@ export default {
 
 		res.send(transactionInfo.id);
 	},
+
+	async updatePointsTransaction(
+		req: Request,
+		res: Response,
+		next: NextFunction
+	) {
+		// need user id (actually get the fucking user)
+		// Get the
+		// check if points are okay
+		// if okay reduce points
+	},
 };
