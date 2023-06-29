@@ -85,6 +85,8 @@
 
 #### USER 🤓
 
+- GET `api/user/announcements`
+  - gets announcements
 - GET `api/user/`
   - Purpose:
     - this gets the data to the logged in user
@@ -110,6 +112,29 @@
 
 #### ADMIN :godmode:
 
+- GET `api/user/announcements`
+
+  - gets announcements
+
+- PATCH `api/user/announcements/:id`
+
+  - patch announcments
+    Query:
+    "type": string,
+    "description":string
+
+- PUT `api/user/announcements`
+
+  - add announcments
+    Query:
+    "type": string,
+    "description":string
+
+- DELETE `api/user/announcements/:id`
+  - deletes announcments
+    Query:
+    "type": string,
+    "description":string
 - GET `api/admin/phrase`
 
   - Query:
