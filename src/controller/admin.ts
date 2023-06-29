@@ -114,6 +114,7 @@ export default {
 		const data = await sqlExe(query);
 		res.send(data);
 	},
+
 	async updateTransaction(req: Request, res: Response, next: NextFunction) {
 		const query = 'UPDATE transaction_history SET status = ? WHERE id = ? ';
 		const newStatus: string = req.body.status;
@@ -128,8 +129,9 @@ export default {
 	async addAttendance(req: Request, res: Response, next: NextFunction) {
 		const id = req.params.id;
 		const query = 'UPDATE attendance SET days = days+1 WHERE user_id = ?';
+		const pointsAdd = 'UPDATE user SET points = points+50 WHERE user_id =?';
 		const data: any = await sqlExe(query, [id]);
-
+		const points = await sqlExe(pointsAdd, [id]);
 		if (data.affectedRows == 0) {
 			return res.sendStatus(400);
 		}
@@ -187,7 +189,7 @@ export default {
 			pointsData[0].price > userData[0].points ||
 			pointsData[0].status == 'paid'
 		)
-			return res.status(400).send('User points not good');
+			return res.status(400).send('Points are invalid');
 
 		const query = await sqlExe(changeStatus, ['paid', pointsData[0].id]);
 		const reducePoints = await sqlExe(changePoints, [
