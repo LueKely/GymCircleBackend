@@ -60,4 +60,10 @@ admin.patch(
 	middleman(adminController.updatePointsTransaction)
 );
 
+admin.patch(
+	'/subscription-add/:id',
+	validateAdmin,
+	middleman(adminController.subscriptionPoints)
+);
+
 export default admin;

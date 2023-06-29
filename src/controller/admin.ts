@@ -114,7 +114,6 @@ export default {
 		const data = await sqlExe(query);
 		res.send(data);
 	},
-
 	async updateTransaction(req: Request, res: Response, next: NextFunction) {
 		const query = 'UPDATE transaction_history SET status = ? WHERE id = ? ';
 		const newStatus: string = req.body.status;
@@ -161,7 +160,6 @@ export default {
 
 		res.send(transactionInfo.id);
 	},
-
 	async updatePointsTransaction(
 		req: Request,
 		res: Response,
@@ -198,5 +196,14 @@ export default {
 		]);
 
 		res.send('Update successful');
+	},
+	async subscriptionPoints(req: Request, res: Response, next: NextFunction) {
+		const id = req.params.id;
+		const addedPoints = req.body.points;
+		const query = 'UPDATE user SET points = points+? WHERE user_id = ? ';
+
+		await sqlExe(query, [addedPoints, id]);
+
+		res.send('successful');
 	},
 };
