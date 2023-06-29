@@ -49,4 +49,10 @@ export default {
 		);
 		res.send(data[0]).status(200);
 	},
+	async getAnnouncements(req: Request, res: Response, next: NextFunction) {
+		const query = 'SELECT * FROM bulletinboard';
+
+		const data = await sqlExe(query);
+		res.send(data);
+	},
 };

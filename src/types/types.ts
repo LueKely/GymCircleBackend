@@ -40,3 +40,8 @@ export interface Transaction {
 	status: 'paid' | 'not paid';
 	date: string;
 }
+
+export interface Announcements {
+	type: string;
+	description: string;
+}

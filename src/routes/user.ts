@@ -19,4 +19,5 @@ userRoute.put('/transaction', limitRate, middleman(user.generateTransaction));
 // get user info
 userRoute.get('/', middleman(user.getInfo));
 
+userRoute.get('/announcements', limitRate, middleman(user.getAnnouncements));
 export default userRoute;

@@ -66,4 +66,24 @@ admin.patch(
 	middleman(adminController.subscriptionPoints)
 );
 
+admin.put(
+	'/announcements',
+	validateAdmin,
+	middleman(adminController.addAnnouncements)
+);
+admin.get(
+	'/announcements',
+	validateAdmin,
+	middleman(adminController.getAnnouncements)
+);
+admin.patch(
+	'/announcements/:id',
+	validateAdmin,
+	middleman(adminController.updateAnnouncements)
+);
+admin.delete(
+	'/announcements/:id',
+	validateAdmin,
+	middleman(adminController.deleteAnnouncements)
+);
 export default admin;

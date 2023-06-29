@@ -6,6 +6,7 @@ import { sqlExe } from '../config/db';
 import { Admin } from '../types/types';
 import { EditUser } from '../types/types';
 import { Transaction } from '../types/types';
+import { Announcements } from '../types/types';
 
 export default {
 	async validatePhrase(req: Request, res: Response, next: NextFunction) {
@@ -205,5 +206,33 @@ export default {
 		await sqlExe(query, [addedPoints, id]);
 
 		res.send('successful');
+	},
+	async addAnnouncements(req: Request, res: Response, next: NextFunction) {
+		const data: Announcements = req.body;
+		const query = 'INSERT INTO bulletinboard (type,description) VALUES (?,?)';
+
+		await sqlExe(query, [...Object.values(data)]);
+		res.send('successful');
+	},
+	async getAnnouncements(req: Request, res: Response, next: NextFunction) {
+		const query = 'SELECT * FROM bulletinboard';
+
+		const data = await sqlExe(query);
+		res.send(data);
+	},
+	async updateAnnouncements(req: Request, res: Response, next: NextFunction) {
+		const id = req.params.id;
+		const info: Announcements = req.body;
+		const query =
+			'UPDATE bulletinboard SET type = ?, description=? WHERE id = ?';
+
+		await sqlExe(query, [info.type, info.description, id]);
+
+		res.send('successful');
+	},
+	async deleteAnnouncements(req: Request, res: Response, next: NextFunction) {
+		const query = 'DELETE FROM bulletinboard WHERE id = ?';
+		await sqlExe(query, [req.params.id]);
+		res.send('Success');
 	},
 };
