@@ -98,12 +98,15 @@
     - this posts a transaction receipt to the database
 
 - PATCH `api/user/`
+
   - Query:
     - name: string
     - age: number
     - address: string
   - Purpose:
     - updates the user info
+
+- PUT`ape/user/transaction`
 
 #### ADMIN :godmode:
 
@@ -168,7 +171,13 @@
 
   - increments the user attendance
 
-- POST `api/guest`
+- PATCH `api/admin/points-transaction/id`
+  params:
+  this is for the users points transaction
+
+  - id of the transaction
+
+- POST `api/admin/guest`
   - creates a transaction for guests (walk ins)
   - Query:
     - name: string (tier of subscription)
