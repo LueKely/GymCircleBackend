@@ -53,4 +53,11 @@ admin.post(
 	validateAdmin,
 	middleman(adminController.generateGuestTransactions)
 );
+
+admin.patch(
+	'/points-transaction/:id',
+	validateAdmin,
+	middleman(adminController.updatePointsTransaction)
+);
+
 export default admin;

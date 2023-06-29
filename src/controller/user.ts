@@ -15,12 +15,13 @@ export default {
 			type: req.body.type,
 			buyerId: userId,
 			price: req.body.price,
-			status: 'not paid',
 			date: new Date().toLocaleDateString('en-US'),
+			status: 'not paid',
 		};
 
 		const infoToArray = Object.values(transactionInfo);
-		const query: string = 'INSERT INTO transaction_history VALUES(?,?,?,?,?,?)';
+		const query: string =
+			'INSERT INTO transaction_history VALUES(?,?,?,?,?,?,?)';
 		const data = await sqlExe(query, [...infoToArray]);
 
 		res.send(transactionInfo.id);

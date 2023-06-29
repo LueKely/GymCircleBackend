@@ -148,8 +148,8 @@ export default {
 			type: 'subscription',
 			buyerId: 0,
 			price: req.body.price,
-			status: 'paid',
 			date: new Date().toLocaleDateString('en-US'),
+			status: 'paid',
 		};
 
 		const infoToArray = Object.values(transactionInfo);
@@ -165,17 +165,36 @@ export default {
 		res: Response,
 		next: NextFunction
 	) {
-		// need user id (actually get the fucking user)
-		// Get the
-		// check if points are okay
-		// if okay reduce points
+		const queryUserTransaction: string =
+			'SELECT * FROM transaction_history WHERE id = ?';
 
-		// get the transaction data
-		// query the id of the user
-		//
-		const queryUserTransaction: string = '';
-		const queryUserPoints: string = 'SELECT * FROM user WHERE user ';
-		const data = await sqlExe(queryUserPoints);
-		res.send(data);
+		const queryUserPoints: string =
+			'SELECT points FROM user WHERE user_id = ? ';
+
+		const changeStatus: string =
+			'UPDATE transaction_history SET status = ? WHERE id = ?  ';
+
+		const changePoints: string =
+			'UPDATE user SET points = points-? WHERE user_id = ?';
+
+		const pointsData = await sqlExe(queryUserTransaction, [req.params.id]);
+		const userData = await sqlExe(queryUserPoints, [pointsData[0].buyer_id]);
+
+		console.log(pointsData[0]);
+		console.log(userData[0]);
+		//  if price points is greater than user points
+		if (
+			pointsData[0].price > userData[0].points ||
+			pointsData[0].status == 'paid'
+		)
+			return res.status(400).send('User points not good');
+
+		const query = await sqlExe(changeStatus, ['paid', pointsData[0].id]);
+		const reducePoints = await sqlExe(changePoints, [
+			pointsData[0].price,
+			pointsData[0].buyer_id,
+		]);
+
+		res.send('Update successful');
 	},
 };
