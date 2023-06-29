@@ -178,10 +178,18 @@
   - id of the transaction
 
 - POST `api/admin/guest`
+
   - creates a transaction for guests (walk ins)
   - Query:
     - name: string (tier of subscription)
     - price: number the price
+
+- PATCH `api/admin/subscription-add/:id`
+  - This is for subscript points dagdag and shit
+  - Query:
+    -points:number
+  - Params:
+    - id: for user members
 
 # Lue's guide to commit messages:
 
