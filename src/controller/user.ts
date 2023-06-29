@@ -14,6 +14,7 @@ export default {
 			transactionName: req.body.name,
 			type: req.body.type,
 			buyerId: userId,
+			price: req.body.price,
 			status: 'not paid',
 			date: new Date().toLocaleDateString('en-US'),
 		};

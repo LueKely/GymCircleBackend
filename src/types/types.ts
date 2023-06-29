@@ -36,6 +36,7 @@ export interface Transaction {
 	transactionName: string;
 	type: 'points' | 'subscription';
 	buyerId: number;
+	price: number;
 	status: 'paid' | 'not paid';
 	date: string;
 }

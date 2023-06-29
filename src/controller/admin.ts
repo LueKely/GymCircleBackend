@@ -147,12 +147,14 @@ export default {
 			transactionName: req.body.name,
 			type: 'subscription',
 			buyerId: 0,
+			price: req.body.price,
 			status: 'paid',
 			date: new Date().toLocaleDateString('en-US'),
 		};
 
 		const infoToArray = Object.values(transactionInfo);
-		const query: string = 'INSERT INTO transaction_history VALUES(?,?,?,?,?,?)';
+		const query: string =
+			'INSERT INTO transaction_history VALUES(?,?,?,?,?,?,?)';
 		const data = await sqlExe(query, [...infoToArray]);
 
 		res.send(transactionInfo.id);
@@ -167,5 +169,13 @@ export default {
 		// Get the
 		// check if points are okay
 		// if okay reduce points
+
+		// get the transaction data
+		// query the id of the user
+		//
+		const queryUserTransaction: string = '';
+		const queryUserPoints: string = 'SELECT * FROM user WHERE user ';
+		const data = await sqlExe(queryUserPoints);
+		res.send(data);
 	},
 };
