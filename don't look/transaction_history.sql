@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 13, 2023 at 12:27 PM
+-- Generation Time: Jun 30, 2023 at 09:52 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.0.25
 
@@ -32,6 +32,7 @@ CREATE TABLE `transaction_history` (
   `name` varchar(100) NOT NULL,
   `type` varchar(100) NOT NULL,
   `buyer_id` int(100) NOT NULL,
+  `price` int(11) NOT NULL,
   `date` varchar(100) NOT NULL,
   `status` varchar(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -40,10 +41,10 @@ CREATE TABLE `transaction_history` (
 -- Dumping data for table `transaction_history`
 --
 
-INSERT INTO `transaction_history` (`id`, `name`, `type`, `buyer_id`, `date`, `status`) VALUES
-('48bd9b0c-2d84-491c-9d16-020885bc70bd', 'testing', 'subscription', 8, 'not paid', '6/10/2023'),
-('ad1d8b5d-8821-4129-ab99-b7026d12d014', 'testing', 'subscription', 8, 'not paid', '6/10/2023'),
-('b3445510-055d-46c7-bcc7-137a90aadcab', 'testing', 'subscription', 8, 'not paid', '6/10/2023');
+INSERT INTO `transaction_history` (`id`, `name`, `type`, `buyer_id`, `price`, `date`, `status`) VALUES
+('1', 'Lue', 'subscription', 10, 0, 'ngaun lang', 'paid'),
+('bd5d4a3b-535a-457d-bbec-b91a59ed2cf6', 'testing', 'subscription', 148004, 10, 'not paid', '6/29/2023'),
+('cfb45670-f08f-470b-96fa-26b7d7018a27', 'testing', 'subscription', 148004, 10, '6/29/2023', 'paid');
 
 --
 -- Indexes for dumped tables

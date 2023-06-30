@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 13, 2023 at 12:27 PM
+-- Generation Time: Jun 30, 2023 at 09:53 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.0.25
 
@@ -31,6 +31,15 @@ CREATE TABLE `attendance` (
   `user_id` int(11) NOT NULL,
   `days` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `attendance`
+--
+
+INSERT INTO `attendance` (`user_id`, `days`) VALUES
+(8, 4),
+(577919, 0),
+(148004, 1);
 
 --
 -- Indexes for dumped tables

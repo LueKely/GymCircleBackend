@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 13, 2023 at 11:54 AM
+-- Generation Time: Jun 30, 2023 at 09:52 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.0.25
 
@@ -43,8 +43,13 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `name`, `email`, `password`, `age`, `address`, `tier`, `points`) VALUES
-(8, 'new', 'super lue', '$2b$10$zzGsJFbPYy5iavQP0yb2OOIWKLEiWApYvGbrgRoqOezrDElZbkUa6', 100, 'what', 'poor', 5),
-(10, 'not lue', 'super not lue', '$2b$10$hRe5Bi/LMm2jOwMt5.MweOl5ZYjzlqq1GOJCAfGiPtRB44wKQk/AK', 100, 'no where', 'rich', 0);
+(8, 'new', 'super lue', '$2b$10$zzGsJFbPYy5iavQP0yb2OOIWKLEiWApYvGbrgRoqOezrDElZbkUa6', 100, 'niggers', 'poor', 5),
+(10, 'not lue', 'super not lue', '$2b$10$hRe5Bi/LMm2jOwMt5.MweOl5ZYjzlqq1GOJCAfGiPtRB44wKQk/AK', 100, 'no where', 'rich', 0),
+(11, 'register', 'superb lue', '$2b$10$dXE0DjjaxV46MBJGtt85ZetaGFqHHaHrNcHe1lOOlfdCFQV0d9u0u', 5, 'adwad', 'PROOO', 0),
+(148004, 'Ernest', 'monti', '$2b$10$7eAXwYNKPTABY94/Pn7fcetxjjyLuBT.wXq.mI5KErUAEDLDnlCle', 5, 'awdawdawd', 'Gold', 140),
+(577919, 'register', 'final', '$2b$10$CwO3r1IGAmAsxLXNXE8hVeign4lWJ7IUcJdmo8.gEBVwHmGV7u83e', 5, 'adwad', 'PROOO', 0),
+(667238, 'register', 'superb ue', '$2b$10$N83rIMHpc.VsJfqULS9us.yV0uaEsNPoIQDrjPbAZ9auzbzCIJJ.G', 5, 'adwad', 'PROOO', 0),
+(736315, 'register', 'supeb ue', '$2b$10$jAESnUg.lWBgDScTWb5./Om3vzzJXyBxzCwemWJXJZavGVTY7jaby', 5, 'adwad', 'PROOO', 0);
 
 --
 -- Indexes for dumped tables
@@ -55,16 +60,6 @@ INSERT INTO `user` (`user_id`, `name`, `email`, `password`, `age`, `address`, `t
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`user_id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `user`
---
-ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
