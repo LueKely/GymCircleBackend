@@ -1,5 +1,6 @@
 // express
 import express, { Express, Request, Response } from 'express';
+import cors from 'cors';
 // middleman
 import { errorHandler } from './src/middleware/middleman';
 import { notFoundHandler } from './src/middleware/middleman';
@@ -13,7 +14,7 @@ import pool from './src/config/db';
 import * as dotenv from 'dotenv';
 dotenv.config();
 
-const port = 3000;
+const port = 3030;
 const app: Express = express();
 
 // db from the  database
@@ -27,6 +28,7 @@ pool.getConnection((error, connection) => {
 });
 
 // init the middleware
+app.use(cors());
 app.use(errorHandler);
 app.use(express.json());
 
@@ -35,7 +37,9 @@ app.use(express.json());
 app.listen(port, () => {
 	console.log(`now listening on port ${port}`);
 });
-
+app.get('/test', (req: Request, res: Response) => {
+	res.send('HELLO');
+});
 app.use('/user', userRoute);
 app.use('/admin', admin);
 app.use('/login', loginRouter);
