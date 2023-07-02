@@ -38,7 +38,10 @@ app.listen(port, () => {
 	console.log(`now listening on port ${port}`);
 });
 app.get('/test', (req: Request, res: Response) => {
-	res.send('HELLO');
+	res.send('GET TEST');
+});
+app.post('/test', (req: Request, res: Response) => {
+	res.send('testing hello');
 });
 app.use('/user', userRoute);
 app.use('/admin', admin);
