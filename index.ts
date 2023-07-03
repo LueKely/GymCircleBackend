@@ -41,8 +41,18 @@ app.get('/test', (req: Request, res: Response) => {
 	res.send('GET TEST');
 });
 app.post('/test', (req: Request, res: Response) => {
-	res.send('testing hello');
+	res.send('POST TEST');
 });
+app.patch('/test', (req: Request, res: Response) => {
+	res.send('PATCH TEST');
+});
+app.put('/test', (req: Request, res: Response) => {
+	res.send('PUT TEST');
+});
+app.delete('/test', (req: Request, res: Response) => {
+	res.send('DELETE TEST');
+});
+
 app.use('/user', userRoute);
 app.use('/admin', admin);
 app.use('/login', loginRouter);
