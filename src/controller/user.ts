@@ -27,6 +27,8 @@ export default {
 			status: 'not paid',
 		};
 
+		console.log(getCurrentDate());
+
 		const infoToArray = Object.values(transactionInfo);
 		const query: string =
 			'INSERT INTO transaction_history VALUES(?,?,?,?,?,?,?)';
@@ -46,6 +48,23 @@ export default {
 			[name, age, address, userId]
 		);
 		res.send('info updated').status(200);
+	},
+
+	async getTransactions(req: Request, res: Response) {
+		const userId = req.body.payload;
+		const query: string =
+			'SELECT id,name,type,price,date,status FROM transaction_history WHERE buyer_id=?';
+
+		const data = await sqlExe(query, [userId]);
+
+		res.send(data);
+	},
+
+	async filterTransactions(req: Request, res: Response) {
+		const userId = req.body.payload;
+		const query: string =
+			'SELECT date FROM transaction_history WHERE buyer_id=? AND status="not paid"';
+		const data = await sqlExe(query, [userId]);
 	},
 
 	// get user info
