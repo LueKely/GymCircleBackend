@@ -40,12 +40,10 @@ export default {
 	// update
 	async updateInfo(req: Request, res: Response, next: NextFunction) {
 		const userId = req.body.payload;
-		const { name, age, address } = req.body;
-		console.log(userId);
 
 		const data = await sqlExe(
-			'UPDATE user SET name = ?, age = ?, address = ? WHERE user_id = ?;',
-			[name, age, address, userId]
+			'UPDATE user SET email = ?, name = ?, age = ?, address = ? WHERE user_id = ?;',
+			[req.body.email, req.body.name, req.body.age, req.body.address, userId]
 		);
 		res.send('info updated').status(200);
 	},
