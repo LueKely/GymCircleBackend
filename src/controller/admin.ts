@@ -144,13 +144,21 @@ export default {
 		res: Response,
 		next: NextFunction
 	) {
+		function getCurrentDate() {
+			const today = new Date();
+			const year = today.getFullYear();
+			const month = String(today.getMonth() + 1).padStart(2, '0');
+			const day = String(today.getDate()).padStart(2, '0');
+			return `${year}-${month}-${day}`;
+		}
+
 		const transactionInfo: Transaction = {
 			id: crypto.randomUUID(),
 			transactionName: req.body.name,
 			type: 'subscription',
 			buyerId: 0,
 			price: req.body.price,
-			date: new Date().toLocaleDateString('en-US'),
+			date: getCurrentDate(),
 			status: 'paid',
 		};
 
