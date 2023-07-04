@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 04, 2023 at 02:10 AM
+-- Generation Time: Jul 04, 2023 at 07:06 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.0.25
 
@@ -118,7 +118,7 @@ CREATE TABLE `transaction_history` (
   `type` varchar(100) NOT NULL,
   `buyer_id` int(100) NOT NULL,
   `price` int(11) NOT NULL,
-  `date` varchar(100) NOT NULL,
+  `date` date NOT NULL,
   `status` varchar(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -127,9 +127,11 @@ CREATE TABLE `transaction_history` (
 --
 
 INSERT INTO `transaction_history` (`id`, `name`, `type`, `buyer_id`, `price`, `date`, `status`) VALUES
-('1', 'Lue', 'subscription', 10, 0, 'ngaun lang', 'paid'),
-('bd5d4a3b-535a-457d-bbec-b91a59ed2cf6', 'testing', 'subscription', 148004, 10, 'not paid', '6/29/2023'),
-('cfb45670-f08f-470b-96fa-26b7d7018a27', 'testing', 'subscription', 148004, 10, '6/29/2023', 'paid');
+('432f01bc-e0bb-4434-9981-c96eed7d8481', 'hello', 'testing', 148004, 200, '2023-07-04', 'not paid'),
+('565f0e41-c28f-4e08-977d-aa10d205c9b0', 'hello', 'testing', 148004, 200, '2023-07-04', 'not paid'),
+('adwawdawdawd', 'lue', 'Pro', 148004, 100, '2023-07-20', 'poor'),
+('d852431f-f913-47ad-9598-993e32430a21', 'hello', 'testing', 148004, 200, '2023-07-04', 'not paid'),
+('e27b7c2f-5c0e-4b8f-bb58-c15ddb5d5524', 'hello', 'testing', 148004, 200, '2023-07-04', 'not paid');
 
 -- --------------------------------------------------------
 
