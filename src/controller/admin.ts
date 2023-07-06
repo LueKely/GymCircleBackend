@@ -223,7 +223,7 @@ export default {
 		res.send('successful');
 	},
 	async getAnnouncements(req: Request, res: Response, next: NextFunction) {
-		const query = 'SELECT * FROM bulletinboard';
+		const query = 'SELECT * FROM bulletinboard ORDER BY id DESC ';
 
 		const data = await sqlExe(query);
 		res.send(data);

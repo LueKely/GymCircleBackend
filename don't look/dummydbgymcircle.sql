@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 04, 2023 at 07:06 AM
+-- Generation Time: Jul 06, 2023 at 08:11 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.0.25
 
@@ -67,7 +67,8 @@ CREATE TABLE `attendance` (
 INSERT INTO `attendance` (`user_id`, `days`) VALUES
 (8, 4),
 (577919, 0),
-(148004, 2);
+(148004, 2),
+(224907, 0);
 
 -- --------------------------------------------------------
 
@@ -86,7 +87,9 @@ CREATE TABLE `bulletinboard` (
 --
 
 INSERT INTO `bulletinboard` (`id`, `type`, `description`) VALUES
-(2, 'discount', 'SUBO TITE FUENTES BARE WITH ME FUCKER');
+(2, 'discount', '75% off to our beverages and chakes!'),
+(4, 'error', '2023/06/07 Maintinance'),
+(5, 'discount', '2023/06/9 Maintenance Finished! Free Beverages for today');
 
 -- --------------------------------------------------------
 
@@ -118,7 +121,7 @@ CREATE TABLE `transaction_history` (
   `type` varchar(100) NOT NULL,
   `buyer_id` int(100) NOT NULL,
   `price` int(11) NOT NULL,
-  `date` date NOT NULL,
+  `date` varchar(100) NOT NULL,
   `status` varchar(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -127,11 +130,15 @@ CREATE TABLE `transaction_history` (
 --
 
 INSERT INTO `transaction_history` (`id`, `name`, `type`, `buyer_id`, `price`, `date`, `status`) VALUES
-('432f01bc-e0bb-4434-9981-c96eed7d8481', 'hello', 'testing', 148004, 200, '2023-07-04', 'not paid'),
-('565f0e41-c28f-4e08-977d-aa10d205c9b0', 'hello', 'testing', 148004, 200, '2023-07-04', 'not paid'),
-('adwawdawdawd', 'lue', 'Pro', 148004, 100, '2023-07-20', 'poor'),
-('d852431f-f913-47ad-9598-993e32430a21', 'hello', 'testing', 148004, 200, '2023-07-04', 'not paid'),
-('e27b7c2f-5c0e-4b8f-bb58-c15ddb5d5524', 'hello', 'testing', 148004, 200, '2023-07-04', 'not paid');
+('1203fd03-d45a-4457-b851-db26fe76355a', 'Gold', 'subscription', 224907, 1650, '2023-07-06', 'not paid'),
+('13221cf5-142f-45d9-b59a-aff0c8421380', 'Gym Official Wristband', 'points', 224907, 18, '2023-07-06', 'not paid'),
+('295593fe-9cd5-4d7c-802c-4a44e03ae4bf', 'Silver', 'subscription', 224907, 1250, '2023-07-06', 'not paid'),
+('81f0e4ac-34bd-4c21-b7dc-5f515573acdc', '1lb of Whey Protein', 'points', 224907, 30, '2023-07-06', 'not paid'),
+('a5fffc49-35de-4b07-909d-d8968214bba7', 'Gym Official Socks', 'points', 224907, 18, '2023-07-06', 'not paid'),
+('aa192f6c-6a48-4802-8e43-6d90527b505c', 'Silver', 'subscription', 224907, 1250, '2023-07-06', 'paid'),
+('b73352cf-892c-41dd-99d4-0f55d2066a08', 'Bronze', 'subscription', 224907, 500, '2023-07-06', 'not paid'),
+('c48ce282-af83-4419-a440-195585e438f6', 'Gym Official Socks', 'points', 224907, 18, '2023-07-06', 'not paid'),
+('dummy', 'dummy', 'dummy', 224907, 1000, '2023-07-05', 'paid');
 
 -- --------------------------------------------------------
 
@@ -159,6 +166,7 @@ INSERT INTO `user` (`user_id`, `name`, `email`, `password`, `age`, `address`, `t
 (10, 'not lue', 'super not lue', '$2b$10$hRe5Bi/LMm2jOwMt5.MweOl5ZYjzlqq1GOJCAfGiPtRB44wKQk/AK', 100, 'no where', 'rich', 0),
 (11, 'register', 'superb lue', '$2b$10$dXE0DjjaxV46MBJGtt85ZetaGFqHHaHrNcHe1lOOlfdCFQV0d9u0u', 5, 'adwad', 'PROOO', 0),
 (148004, 'Ernest', 'monti', '$2b$10$7eAXwYNKPTABY94/Pn7fcetxjjyLuBT.wXq.mI5KErUAEDLDnlCle', 5, 'awdawdawd', 'Gold', 150),
+(224907, 'Anunciacion Lue Kely', 'lue@gmail.com', '$2b$10$bYkCMUpJDY2UunEfW2wwZ.Aq7.GN1KRzLm1f7Zt0R2N81g0r8hCHK', 21, '026 jp rizal st. pamplona las pinas city', 'Gold', 100),
 (577919, 'register', 'final', '$2b$10$CwO3r1IGAmAsxLXNXE8hVeign4lWJ7IUcJdmo8.gEBVwHmGV7u83e', 5, 'adwad', 'PROOO', 0),
 (667238, 'register', 'superb ue', '$2b$10$N83rIMHpc.VsJfqULS9us.yV0uaEsNPoIQDrjPbAZ9auzbzCIJJ.G', 5, 'adwad', 'PROOO', 0),
 (736315, 'register', 'supeb ue', '$2b$10$jAESnUg.lWBgDScTWb5./Om3vzzJXyBxzCwemWJXJZavGVTY7jaby', 5, 'adwad', 'PROOO', 0);
@@ -218,7 +226,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `bulletinboard`
 --
 ALTER TABLE `bulletinboard`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables
