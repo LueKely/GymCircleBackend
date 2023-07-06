@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import { sqlExe } from '../config/db';
 import crypto from 'crypto';
 import { Transaction } from '../types/types';
+import sort from '../utils/sort';
 
 export default {
 	// post transaction
@@ -52,7 +53,6 @@ export default {
 		const userId = req.body.payload;
 		const query: string =
 			'SELECT id,name,type,price,date,status FROM transaction_history WHERE buyer_id=?';
-
 		const data = await sqlExe(query, [userId]);
 
 		res.send(data);
@@ -61,8 +61,9 @@ export default {
 	async filterTransactions(req: Request, res: Response) {
 		const userId = req.body.payload;
 		const query: string =
-			'SELECT date FROM transaction_history WHERE buyer_id=? AND status="not paid"';
+			'SELECT id,date,name FROM transaction_history WHERE buyer_id = ? AND status = "paid" AND type = "subscription" ORDER BY date DESC';
 		const data = await sqlExe(query, [userId]);
+		res.send(data[0]);
 	},
 
 	// get user info
@@ -74,6 +75,7 @@ export default {
 		);
 		res.send(data[0]).status(200);
 	},
+
 	async getAnnouncements(req: Request, res: Response, next: NextFunction) {
 		const query = 'SELECT * FROM bulletinboard';
 

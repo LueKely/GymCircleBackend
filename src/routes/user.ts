@@ -17,7 +17,7 @@ userRoute.patch('/', limitRate, middleman(user.updateInfo));
 userRoute.put('/transaction', limitRate, middleman(user.generateTransaction));
 
 userRoute.get('/transaction', limitRate, middleman(user.getTransactions));
-
+userRoute.get('/filter', middleman(user.filterTransactions));
 // get user info
 userRoute.get('/', middleman(user.getInfo));
 
