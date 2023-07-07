@@ -77,7 +77,7 @@ export default {
 	},
 
 	async getAnnouncements(req: Request, res: Response, next: NextFunction) {
-		const query = 'SELECT * FROM bulletinboard ORDER BY id DESC';
+		const query = 'SELECT * FROM bulletinboard ORDER BY id DESC LIMIT 4';
 
 		const data = await sqlExe(query);
 		res.send(data);
