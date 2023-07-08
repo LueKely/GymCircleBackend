@@ -129,7 +129,7 @@ export default {
 	async addAttendance(req: Request, res: Response, next: NextFunction) {
 		const id = req.params.id;
 		const query = 'UPDATE attendance SET days = days+1 WHERE user_id = ?';
-		const pointsAdd = 'UPDATE user SET points = points+50 WHERE user_id =?';
+		const pointsAdd = 'UPDATE user SET points = points+2 WHERE user_id =?';
 		const data: any = await sqlExe(query, [id]);
 		const points = await sqlExe(pointsAdd, [id]);
 		if (data.affectedRows == 0) {
